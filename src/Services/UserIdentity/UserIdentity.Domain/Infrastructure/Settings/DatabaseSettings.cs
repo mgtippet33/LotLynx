@@ -4,5 +4,5 @@ public class DatabaseSettings
 {
     public const string SectionName = "Database";
 
-    public string ConnectionString { get; private set; } = null!;
+    public string ConnectionString { get; set; } = null!;
 }
