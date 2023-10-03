@@ -1,0 +1,42 @@
+﻿@model LoginViewModel
+
+<head>
+    <link href=@Url.Content("~/styles/app.css") rel="stylesheet" type="text/css" />
+</head>
+
+<div class="container">
+    <form asp-controller="Auth" asp-action="Login" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="header">Login</div>
+        <div class="block">
+            <label>Email</label>
+            <input asp-for="Email" class="input" />
+            <span asp-validation-for="Email" class="error-validation"></span>
+        </div>
+        <div class="block">
+            <label>Password</label>
+            <input asp-for="Password" class="input" />
+            <span asp-validation-for="Password" class="error-validation"></span>
+        </div>
+        <div class="block">
+            <button type="submit" class="button">Sign In</button>
+        </div>
+        <div class="register-link">
+            Don't have an account?
+            <a href="@Url.Action("Register", "Auth", new { ReturnUrl = ViewContext.HttpContext.Request.Query["ReturnUrl"] })">Register</a>
+        </div>
+
+    </form>
+</div>
+
+
+<script>
+    @if (!string.IsNullOrEmpty(ViewBag.AlertMessage))
+    {
+        <text>
+            window.onload = function() {
+                alert('@ViewBag.AlertMessage');
+            }
+        </text>
+    }
+</script>

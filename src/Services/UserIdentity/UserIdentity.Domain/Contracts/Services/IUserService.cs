@@ -1,6 +1,8 @@
-﻿namespace UserIdentity.Domain.Contracts.Services;
+﻿using UserIdentity.Domain.Contracts.Models;
+
+namespace UserIdentity.Domain.Contracts.Services;
 
 public interface IUserService
 {
-    Task GetUserProfileAsync(string id);
+    Task<UserModel> GetUserProfileAsync(string id);
 }
