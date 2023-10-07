@@ -4,7 +4,7 @@ namespace UserIdentity.Domain.Contracts.Services;
 
 public interface IAuthService
 {
-    Task<bool> SingInAsync(SignInUserModel model);
+    Task<SignInUserResultModel> SignInAsync(SignInUserModel model);
 
-    Task SignUpAsync(SignUpUserModel model);
+    Task<SignUpUserResultModel> SignUpAsync(SignUpUserModel model);
 }

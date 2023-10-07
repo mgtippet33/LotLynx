@@ -9,5 +9,6 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<LoginViewModel, SignInUserModel>().ReverseMap();
+        CreateMap<RegisterViewModel, SignUpUserModel>().ReverseMap();
     }
 }

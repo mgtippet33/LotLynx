@@ -1,42 +1,33 @@
-﻿@model LoginViewModel
-
-<head>
-    <link href=@Url.Content("~/styles/app.css") rel="stylesheet" type="text/css" />
-</head>
+﻿@using UserIdentity.Domain.Contracts.Models
+@model LoginViewModel
 
 <div class="container">
-    <form asp-controller="Auth" asp-action="Login" method="post">
-        <input type="hidden" asp-for="ReturnUrl" />
+    <div class="card">
         <div class="header">Login</div>
-        <div class="block">
-            <label>Email</label>
-            <input asp-for="Email" class="input" />
-            <span asp-validation-for="Email" class="error-validation"></span>
-        </div>
-        <div class="block">
-            <label>Password</label>
-            <input asp-for="Password" class="input" />
-            <span asp-validation-for="Password" class="error-validation"></span>
-        </div>
-        <div class="block">
-            <button type="submit" class="button">Sign In</button>
-        </div>
-        <div class="register-link">
-            Don't have an account?
-            <a href="@Url.Action("Register", "Auth", new { ReturnUrl = ViewContext.HttpContext.Request.Query["ReturnUrl"] })">Register</a>
-        </div>
-
-    </form>
-</div>
-
-
-<script>
-    @if (!string.IsNullOrEmpty(ViewBag.AlertMessage))
-    {
-        <text>
-            window.onload = function() {
-                alert('@ViewBag.AlertMessage');
+        <form asp-controller="Auth" asp-action="Login" method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="form-group">
+                <label>Email</label>
+                <input asp-for="Email" class="input" />
+                <span asp-validation-for="Email" class="error-validation"></span>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input asp-for="Password" class="input" type="password" />
+                <span asp-validation-for="Password" class="error-validation"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button">Sign In</button>
+            </div>
+            @if (ViewData.ModelState.ContainsKey(ValidatorProperty.GeneralProperty) && ViewData.ModelState[ValidatorProperty.GeneralProperty]!.Errors.Count > 0)
+            {
+                <div class="alert alert-danger">
+                    @Html.Raw(string.Join("<br/>", ViewData.ModelState[ValidatorProperty.GeneralProperty]!.Errors.Select(e => e.ErrorMessage)))
+                </div>
             }
-        </text>
-    }
-</script>
+        </form>
+        <div class="register-link">
+            Don't have an account? <a href="@Url.Action("Register", "Auth", new { ReturnUrl = ViewContext.HttpContext.Request.Query["ReturnUrl"] })">Register</a>
+        </div>
+    </div>
+</div>

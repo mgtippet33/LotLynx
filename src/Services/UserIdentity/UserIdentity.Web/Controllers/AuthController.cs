@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using IdentityServer4.Services;
-using Microsoft.AspNetCore.Identity;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using UserIdentity.Domain.Contracts.Models;
 using UserIdentity.Domain.Contracts.Services;
+using UserIdentity.Domain.Infrastructure.Settings;
 using UserIdentity.Web.Models;
 
 namespace UserIdentity.Web.Controllers
@@ -12,22 +13,24 @@ namespace UserIdentity.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IAuthService _authService;
+        private readonly ReturnUrlsSettings _returnUrlsSettings;
 
         public AuthController(
             IAuthService authService,
-            IMapper mapper)
+            IMapper mapper,
+            IOptions<ReturnUrlsSettings> returnUrlsSettings)
         {
             _authService = authService;
             _mapper = mapper;
+            _returnUrlsSettings = returnUrlsSettings.Value;
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login()
         {
-            returnUrl = "https://github.com/";
             var viewModel = new LoginViewModel
             {
-                ReturnUrl = returnUrl
+                ReturnUrl = _returnUrlsSettings.WebUrl
             };
 
             return View(viewModel);
@@ -38,87 +41,40 @@ namespace UserIdentity.Web.Controllers
         {
             var model = _mapper.Map<SignInUserModel>(viewModel);
 
-            var isUserExisted = await _authService.SingInAsync(model);
+            var result = await _authService.SignInAsync(model);
 
-            return isUserExisted ? Redirect(viewModel.ReturnUrl) : View(viewModel);
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(viewModel);
-            //}
-
-            //var user = await _userManager.FindByEmailAsync(viewModel.Email);
-
-            //if (user == null)
-            //{
-            //    ModelState.AddModelError(string.Empty, "User not found");
-            //    return View(viewModel);
-            //}
-
-            //var result = await _signInManager.PasswordSignInAsync(viewModel.Email,
-            //    viewModel.Password, false, false);
-
-            //if (result.Succeeded)
-            //{
-            //    return Redirect(viewModel.ReturnUrl);
-            //}
-
-            //ViewBag.AlertMessage = "Invalid data. Please try again.";
-
-            //return View(viewModel);
+            _mapper.Map(result.Data, viewModel);
+            result.ValidationResult.AddToModelState(ModelState);
+            
+            return result.IsValid
+                ? Redirect(viewModel.ReturnUrl)
+                : View(viewModel);
         }
 
-        //[HttpGet]
-        //public IActionResult Register(string returnUrl)
-        //{
-        //    var viewModel = new RegisterViewModel
-        //    {
-        //        ReturnUrl = returnUrl
-        //    };
-        //    return View(viewModel);
+        [HttpGet]
+        public IActionResult Register()
+        {
+            var viewModel = new RegisterViewModel
+            {
+                ReturnUrl = _returnUrlsSettings.LoginPageUrl
+            };
+            
+            return View(viewModel);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel viewModel)
+        {
+            var model = _mapper.Map<SignUpUserModel>(viewModel);
 
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> Register(RegisterViewModel viewModel)
-        //{
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(viewModel);
-        //    }
-
-        //    var user = new IdentityUser
-        //    {
-        //        UserName = viewModel.Email,
-        //        Email = viewModel.Email
-        //    };
-        //    var result = await _userManager.CreateAsync(user, viewModel.Password);
-
-        //    if (result.Succeeded)
-        //    {
-        //        if (!await _roleManager.RoleExistsAsync("User"))
-        //        {
-        //            var role = new IdentityRole("User");
-        //            await _roleManager.CreateAsync(role);
-        //        }
-
-        //        await _userManager.AddToRoleAsync(user, "User");
-
-        //        await _signInManager.SignInAsync(user, false);
-
-        //        return Redirect(viewModel.ReturnUrl);
-        //    }
-
-        //    ViewBag.AlertMessage = "Invalid data. Please try again.";
-
-        //    return View(viewModel);
-        //}
-        //[HttpGet]
-        //public async Task<IActionResult> Logout(string logoutId)
-        //{
-        //    await _signInManager.SignOutAsync();
-        //    var logoutRequest = await _interaction.GetLogoutContextAsync(logoutId);
-        //    return Redirect(logoutRequest.PostLogoutRedirectUri);
-        //}
+            var result = await _authService.SignUpAsync(model);
+            
+            _mapper.Map(result.Data, viewModel);
+            result.ValidationResult.AddToModelState(ModelState);
+            
+            return result.IsValid
+                ? Redirect(viewModel.ReturnUrl)
+                : View(viewModel);
+        }
     }
 }

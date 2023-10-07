@@ -1,17 +1,60 @@
-﻿using UserIdentity.Domain.Contracts.Models;
+﻿using AutoMapper;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using UserIdentity.Data.Entities;
+using UserIdentity.Domain.Contracts.Models;
 using UserIdentity.Domain.Contracts.Services;
+using UserIdentity.Domain.Resources.Validators;
 
 namespace UserIdentity.Domain.Services;
 
-public class AuthService : IAuthService
+public class AuthService : BaseApplicationService, IAuthService
 {
-    public async Task SignUpAsync(SignUpUserModel model)
-    {
-        throw new NotImplementedException();
-    }
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
+    private readonly IMapper _mapper;
 
-    public async Task<bool> SingInAsync(SignInUserModel model)
+    public AuthService(IServiceProvider serviceProvider, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper) : base(serviceProvider)
     {
-        return true; 
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _mapper = mapper;
+    }
+    
+    public async Task<SignInUserResultModel> SignInAsync(SignInUserModel model)
+    {
+        var validationResult = await ValidateModelAsync(model);
+
+        if (validationResult.IsValid)
+        {
+            var user = await _userManager.Users.SingleAsync(u => u.Email == model.Email);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+
+            if (!result.Succeeded)
+            {
+                validationResult.Errors.Add(new ValidationFailure(ValidatorProperty.GeneralProperty, SignInUserResource.User_NotExisted));
+            }
+        }
+
+        return new SignInUserResultModel(model, validationResult);
+    }
+    
+    public async Task<SignUpUserResultModel> SignUpAsync(SignUpUserModel model)
+    {
+        var validationResult = await ValidateModelAsync(model);
+
+        if (validationResult.IsValid)
+        {
+            var user = _mapper.Map<User>(model);
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                validationResult.Errors.Add(new ValidationFailure(ValidatorProperty.GeneralProperty, CommonResource.CommonError));
+            }
+        }
+
+        return new SignUpUserResultModel(model, validationResult);
     }
 }

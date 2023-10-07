@@ -3,23 +3,27 @@ using Microsoft.EntityFrameworkCore;
 using UserIdentity.Data;
 using UserIdentity.Domain.Contracts.Models;
 using UserIdentity.Domain.Contracts.Services;
+using UserIdentity.Domain.Infrastructure.Exceptions;
 
 namespace UserIdentity.Domain.Services;
 
-public class UserService : IUserService
+public class UserService : BaseApplicationService, IUserService
 {
     private readonly AppDbContext _context;
     private readonly IMapper _mapper;
 
-    public UserService(AppDbContext context, IMapper mapper) =>
-        (_context, _mapper) = (context, mapper);
+    public UserService(IServiceProvider serviceProvider, AppDbContext context, IMapper mapper) : base(serviceProvider)
+    {
+        _context = context;
+        _mapper = mapper;
+    }
 
     public async Task<UserModel> GetUserProfileAsync(string id)
     {
         var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-        
-        //// ToDo implement error handling
-        
-        return _mapper.Map<UserModel>(user);
+
+        return user != null
+            ? _mapper.Map<UserModel>(user)
+            : throw new NotFoundUserException();
     }
 }
