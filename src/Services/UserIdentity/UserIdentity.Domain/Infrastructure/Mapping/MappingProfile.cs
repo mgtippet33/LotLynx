@@ -12,7 +12,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid().ToString()))
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
         CreateMap<User, SignUpUserModel>();
-
+        CreateMap<User, UserModel>().ReverseMap();
         CreateMap<User, SignInUserModel>().ReverseMap();
     }
 }
