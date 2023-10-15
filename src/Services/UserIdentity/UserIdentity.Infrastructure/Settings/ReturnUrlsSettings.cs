@@ -1,4 +1,4 @@
-﻿namespace UserIdentity.Domain.Infrastructure.Settings;
+﻿namespace UserIdentity.Infrastructure.Settings;
 
 public class ReturnUrlsSettings
 {

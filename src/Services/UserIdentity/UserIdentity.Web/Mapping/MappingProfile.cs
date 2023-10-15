@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using UserIdentity.Domain.Contracts.Models;
 using UserIdentity.Web.Models;
+using UserIdentity.Domain.Contracts.Models;
 
-namespace UserIdentity.Web.Infrastructure.Mapping;
+namespace UserIdentity.Web.Mapping;
 
 public class MappingProfile : Profile
 {
@@ -10,6 +10,5 @@ public class MappingProfile : Profile
     {
         CreateMap<LoginViewModel, SignInUserModel>().ReverseMap();
         CreateMap<RegisterViewModel, SignUpUserModel>().ReverseMap();
-        CreateMap<UserProfileResponseModel, UserModel>().ReverseMap();
     }
 }

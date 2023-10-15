@@ -1,9 +1,10 @@
 using System.Net;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 using Serilog;
 using UserIdentity.Domain.Infrastructure.Exceptions;
 
-namespace UserIdentity.Web.Infrastructure.Middlewares;
+namespace UserIdentity.Infrastructure.Middlewares;
 
 public class ExceptionHandlerMiddleware
 {

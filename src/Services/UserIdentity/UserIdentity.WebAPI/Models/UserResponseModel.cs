@@ -1,6 +1,6 @@
-namespace UserIdentity.Web.Models;
+﻿namespace UserIdentity.WebAPI.Models;
 
-public class UserProfileResponseModel
+public class UserResponseModel
 {
     public string Id { get; set; } = null!;
 

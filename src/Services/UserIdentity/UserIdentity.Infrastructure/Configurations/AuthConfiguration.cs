@@ -2,7 +2,7 @@
 using IdentityServer4;
 using IdentityServer4.Models;
 
-namespace UserIdentity.Web.Infrastructure.Configurations;
+namespace UserIdentity.Infrastructure.Configurations;
 
 public class AuthConfiguration
 {

@@ -2,10 +2,10 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using UserIdentity.Infrastructure.Settings;
+using UserIdentity.Web.Models;
 using UserIdentity.Domain.Contracts.Models;
 using UserIdentity.Domain.Contracts.Services;
-using UserIdentity.Domain.Infrastructure.Settings;
-using UserIdentity.Web.Models;
 
 namespace UserIdentity.Web.Controllers
 {

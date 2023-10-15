@@ -1,11 +1,11 @@
-using UserIdentity.Web.Infrastructure.Extensions;
-using LoggerExtensions = UserIdentity.Web.Infrastructure.Extensions.LoggerExtensions;
+using UserIdentity.Infrastructure.Extensions;
+using LoggerExtensions = UserIdentity.Infrastructure.Extensions.LoggerExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 services.AddControllersWithViews();
-services.AddServices(builder.Configuration);
+services.AddWebServices(builder.Configuration);
 
 LoggerExtensions.InitializeLogger();
 

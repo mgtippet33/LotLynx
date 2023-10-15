@@ -1,6 +1,6 @@
 using Serilog;
 
-namespace UserIdentity.Web.Infrastructure.Extensions;
+namespace UserIdentity.Infrastructure.Extensions;
 
 public static class LoggerExtensions
 {

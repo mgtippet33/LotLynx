@@ -1,11 +1,11 @@
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserIdentity.Domain.Contracts.Services;
-using UserIdentity.Web.Models;
+using UserIdentity.WebAPI.Models;
 
-namespace UserIdentity.Web.Controllers;
+namespace UserIdentity.WebAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
@@ -30,7 +30,7 @@ public class UserController : ControllerBase
                      ?? string.Empty;
         
         var userProfile = await _userService.GetUserProfileAsync(userId);
-        var result = _mapper.Map<UserProfileResponseModel>(userProfile);
+        var result = _mapper.Map<UserResponseModel>(userProfile);
         
         return Ok(result);
     }

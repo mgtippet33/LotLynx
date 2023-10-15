@@ -2,10 +2,10 @@
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using UserIdentity.Data.Entities;
 using UserIdentity.Domain.Contracts.Models;
-using UserIdentity.Domain.Contracts.Services;
 using UserIdentity.Domain.Resources.Validators;
+using UserIdentity.Data.Entities;
+using UserIdentity.Domain.Contracts.Services;
 
 namespace UserIdentity.Domain.Services;
 

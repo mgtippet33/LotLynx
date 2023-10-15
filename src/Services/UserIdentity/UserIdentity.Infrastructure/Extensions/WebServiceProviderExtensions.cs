@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using UserIdentity.Domain.Services;
+using UserIdentity.Infrastructure.Configurations;
+using UserIdentity.Infrastructure.Settings;
+using UserIdentity.Domain.Infrastructure.Extensions;
 using UserIdentity.Data;
 using UserIdentity.Data.Entities;
 using UserIdentity.Domain.Contracts.Services;
-using UserIdentity.Domain.Infrastructure.Extensions;
-using UserIdentity.Domain.Infrastructure.Settings;
-using UserIdentity.Domain.Services;
-using UserIdentity.Web.Infrastructure.Configurations;
 
-namespace UserIdentity.Web.Infrastructure.Extensions;
+namespace UserIdentity.Infrastructure.Extensions;
 
-public static class ServiceProviderExtensions
+public static class WebServiceProviderExtensions
 {
-    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
     {
         var databaseSettings = configuration.GetSection(DatabaseSettings.SectionName).Get<DatabaseSettings>();
 
@@ -73,7 +75,6 @@ public static class ServiceProviderExtensions
     private static IServiceCollection AddCustomServices(this IServiceCollection services)
     {
         services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IUserService, UserService>();
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

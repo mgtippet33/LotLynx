@@ -1,6 +1,7 @@
-using UserIdentity.Web.Infrastructure.Middlewares;
+using Microsoft.AspNetCore.Builder;
+using UserIdentity.Infrastructure.Middlewares;
 
-namespace UserIdentity.Web.Infrastructure.Extensions;
+namespace UserIdentity.Infrastructure.Extensions;
 
 public static class MiddlewareExtensions
 {

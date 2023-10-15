@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using UserIdentity.Data.Entities;
 using UserIdentity.Domain.Contracts.Models;
 using UserIdentity.Domain.Resources.Validators;
+using UserIdentity.Data.Entities;
 
 namespace UserIdentity.Domain.Validators;
 
