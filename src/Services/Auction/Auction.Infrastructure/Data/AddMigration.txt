@@ -1,0 +1,2 @@
+Add-Migration InitialMigration -Project Auction.Infrastructure -StartupProject Auction.WebAPI -o "Data/Migrations"
+Update-Database -Project Auction.Infrastructure -StartupProject Auction.WebAPI

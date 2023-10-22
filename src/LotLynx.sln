@@ -11,11 +11,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserIdentity.Domain", "Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserIdentity.Data", "Services\UserIdentity\UserIdentity.Data\UserIdentity.Data.csproj", "{90DCB0A3-6471-4100-9918-06023A7015D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserIdentity.Web", "Services\UserIdentity\UserIdentity.Web\UserIdentity.Web.csproj", "{3D0FDAFB-D3A4-4B73-98FF-66CCE8B41EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserIdentity.Web", "Services\UserIdentity\UserIdentity.Web\UserIdentity.Web.csproj", "{3D0FDAFB-D3A4-4B73-98FF-66CCE8B41EAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserIdentity.WebAPI", "Services\UserIdentity\UserIdentity.WebAPI\UserIdentity.WebAPI.csproj", "{94306F24-846B-4EB5-B660-C6585B093B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserIdentity.WebAPI", "Services\UserIdentity\UserIdentity.WebAPI\UserIdentity.WebAPI.csproj", "{94306F24-846B-4EB5-B660-C6585B093B8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserIdentity.Infrastructure", "Services\UserIdentity\UserIdentity.Infrastructure\UserIdentity.Infrastructure.csproj", "{3E40AEC6-F411-4544-9DF2-EC255903AB9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserIdentity.Infrastructure", "Services\UserIdentity\UserIdentity.Infrastructure\UserIdentity.Infrastructure.csproj", "{3E40AEC6-F411-4544-9DF2-EC255903AB9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auction", "Auction", "{B0CF71C7-5AEB-4A96-B32B-B1428C45AB59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction.Domain", "Services\Auction\Auction.Domain\Auction.Domain.csproj", "{6A7D76FD-AA6D-4250-BEAD-5DFDD91F2179}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction.Application", "Services\Auction\Auction.Application\Auction.Application.csproj", "{6A7FD9CF-0C57-4929-B919-6BB7BA5BC67E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction.Infrastructure", "Services\Auction\Auction.Infrastructure\Auction.Infrastructure.csproj", "{809D0CFC-B229-4956-9BF5-EF51A0EFCEC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction.WebAPI", "Services\Auction\Auction.WebAPI\Auction.WebAPI.csproj", "{CEB14B4F-4BCD-4258-B472-F2C5EFE76BED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +53,22 @@ Global
 		{3E40AEC6-F411-4544-9DF2-EC255903AB9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E40AEC6-F411-4544-9DF2-EC255903AB9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E40AEC6-F411-4544-9DF2-EC255903AB9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A7D76FD-AA6D-4250-BEAD-5DFDD91F2179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A7D76FD-AA6D-4250-BEAD-5DFDD91F2179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A7D76FD-AA6D-4250-BEAD-5DFDD91F2179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A7D76FD-AA6D-4250-BEAD-5DFDD91F2179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A7FD9CF-0C57-4929-B919-6BB7BA5BC67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A7FD9CF-0C57-4929-B919-6BB7BA5BC67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A7FD9CF-0C57-4929-B919-6BB7BA5BC67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A7FD9CF-0C57-4929-B919-6BB7BA5BC67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{809D0CFC-B229-4956-9BF5-EF51A0EFCEC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809D0CFC-B229-4956-9BF5-EF51A0EFCEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809D0CFC-B229-4956-9BF5-EF51A0EFCEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809D0CFC-B229-4956-9BF5-EF51A0EFCEC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB14B4F-4BCD-4258-B472-F2C5EFE76BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB14B4F-4BCD-4258-B472-F2C5EFE76BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB14B4F-4BCD-4258-B472-F2C5EFE76BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB14B4F-4BCD-4258-B472-F2C5EFE76BED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +80,11 @@ Global
 		{3D0FDAFB-D3A4-4B73-98FF-66CCE8B41EAE} = {CF0A5295-07D8-44AA-A3E5-7443A86F46D2}
 		{94306F24-846B-4EB5-B660-C6585B093B8B} = {CF0A5295-07D8-44AA-A3E5-7443A86F46D2}
 		{3E40AEC6-F411-4544-9DF2-EC255903AB9D} = {CF0A5295-07D8-44AA-A3E5-7443A86F46D2}
+		{B0CF71C7-5AEB-4A96-B32B-B1428C45AB59} = {14CA6396-6E27-4098-B8F1-A0338FF0AE4C}
+		{6A7D76FD-AA6D-4250-BEAD-5DFDD91F2179} = {B0CF71C7-5AEB-4A96-B32B-B1428C45AB59}
+		{6A7FD9CF-0C57-4929-B919-6BB7BA5BC67E} = {B0CF71C7-5AEB-4A96-B32B-B1428C45AB59}
+		{809D0CFC-B229-4956-9BF5-EF51A0EFCEC8} = {B0CF71C7-5AEB-4A96-B32B-B1428C45AB59}
+		{CEB14B4F-4BCD-4258-B472-F2C5EFE76BED} = {B0CF71C7-5AEB-4A96-B32B-B1428C45AB59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42A21D60-5956-4F39-A6B9-06933E5B7AD5}
